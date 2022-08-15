@@ -3,12 +3,27 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import "./_popup.scss";
 
-const Popup = ({children, title, active, className}) => {
+const Popup = ({children, title, active, timeoutClose=0, className}) => {
     const popupRef = useRef();
     const [activePopup, setActivePopup] = useState(false);
-    
+    const [timer, setTimer] = useState();
+
     useEffect(() => {
-        setActivePopup(active)
+        return () => clearTimeout(timer);
+    }, []);
+
+    const closeByTimer = (timeout) => {
+        const timer = setTimeout(() => {
+            setActivePopup(false)
+        }, timeout);
+        setTimer(timer);
+    };
+
+    useEffect(() => {
+        setActivePopup(active);
+        if (active && timeoutClose) {
+            closeByTimer(timeoutClose*1000);
+        }
     }, [active]);
 
     const closeByClickAround = event => {
