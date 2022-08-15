@@ -29,6 +29,10 @@
         }
     }
     &__title {
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
         @media (max-width: $md-width) {
             font-size: 1.2rem;
         }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../components/button";
 import Search from "../components/search";
 
@@ -16,7 +17,7 @@ const Layout = (props) => {
         <header className="header">
             <div className="header__container">
                 <div className="header__logo">
-                    <h1 className="header__title">Cargo Planner</h1>
+                    <h1 className="header__title"><Link to="/">Cargo Planner</Link></h1>
                 </div>
                 <div className="header__controls">
                     <div className="header__search">
