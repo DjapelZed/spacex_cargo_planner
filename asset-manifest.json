@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/spacex_cargo_planner/static/css/main.eadb5245.css",
-    "main.js": "/spacex_cargo_planner/static/js/main.dae4b76f.js",
+    "main.css": "/spacex_cargo_planner/static/css/main.3eaae252.css",
+    "main.js": "/spacex_cargo_planner/static/js/main.52fb65da.js",
     "static/media/loader.gif": "/spacex_cargo_planner/static/media/loader.a1a996746e5e48352c81.gif",
     "static/media/search.svg": "/spacex_cargo_planner/static/media/search.ca21fc16724a1664b0e4.svg",
     "index.html": "/spacex_cargo_planner/index.html",
-    "main.eadb5245.css.map": "/spacex_cargo_planner/static/css/main.eadb5245.css.map",
-    "main.dae4b76f.js.map": "/spacex_cargo_planner/static/js/main.dae4b76f.js.map"
+    "main.3eaae252.css.map": "/spacex_cargo_planner/static/css/main.3eaae252.css.map",
+    "main.52fb65da.js.map": "/spacex_cargo_planner/static/js/main.52fb65da.js.map"
   },
   "entrypoints": [
-    "static/css/main.eadb5245.css",
-    "static/js/main.dae4b76f.js"
+    "static/css/main.3eaae252.css",
+    "static/js/main.52fb65da.js"
   ]
 }
