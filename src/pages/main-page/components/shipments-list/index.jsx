@@ -8,7 +8,7 @@ import "./_shipments-list.scss";
 
 // Left side shipment list component
 const ShipmentsList = ({filterWords, isShipmentsHasLoaded}) => {
-    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState(false);
     const [loading, setLoading] = useState(true);
     
     const [allShipmentsNames, setAllShipmentsNames] = useState([]); // all shipments names
@@ -30,6 +30,7 @@ const ShipmentsList = ({filterWords, isShipmentsHasLoaded}) => {
     useEffect(() => {
         updateShipmentsList();
         setLoading(!isShipmentsHasLoaded);
+        setErrorMessage(false);
     }, [isShipmentsHasLoaded]);
 
     // Filtering shipments names by prop filterWords

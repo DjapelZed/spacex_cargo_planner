@@ -10,10 +10,11 @@ import ShipmentsList from "./components/shipments-list";
 import CargoService from "../../services/cargoService";
 
 const MainPage = () => {
-    const [allShipments, setAllShipments] = useState([]); // contains all shipments info
+    const [allShipments, setAllShipments] = useState(null); // contains all shipments info
     const [searchText, setSearchText] = useState(""); // keywords to filter ShipmentsList items
     const [isShipmentsHasLoaded, setIsShipmentsHasLoaded] = useState(false); // ready state, used by ShipmentsList
-    
+    const [save, setSave] = useState(false);
+
     const [activePopupSuccess, setActivePopupSuccess] = useState(false); // control popupSuccess
     const [activePopupSaved, setActivePopupSaved] = useState(false); // control popupSaved
     const [activePopupLoad, setActivePopupLoad] = useState(false); // control popupLoad
@@ -29,9 +30,38 @@ const MainPage = () => {
 
     // save shipments from state to localStorage
     const saveShipments = () => {
-        updateAllShipments();
-        cargoService.saveShipmentsToLocalStorage(allShipments);
-        setActivePopupSaved(true);
+        setSave(true);
+    };
+
+    useEffect(() => {
+        if (save) {
+            updateAllShipments();
+            setActivePopupSaved(true);
+        }
+    }, [save]);
+
+    useEffect(() => {
+        if (allShipments) {
+            console.log(allShipments)
+            cargoService.saveShipmentsToLocalStorage(allShipments);
+        }
+    }, [allShipments]);
+    
+    useEffect(() => {
+        setSave(false);
+    }, [currentShipment]);
+    
+    // push shipment changes from ShipmentInfo component to allShipments
+    const updateAllShipments = () => {
+        const updateStatement = currentShipment.name ? true : false;
+        if (updateStatement) {
+            const filteredShipments = allShipments.filter(s => {
+                return currentShipment.id !== s.id;
+            })
+            filteredShipments.push(currentShipment);
+            setAllShipments(filteredShipments);
+        }
+        setActivePopupSaved(false);
     };
 
     // returns shipment info to ShipmentInfo component
@@ -46,19 +76,6 @@ const MainPage = () => {
             console.log(error);
         }
     }
-    
-    // push shipment changes from ShipmentInfo component to allShipments
-    const updateAllShipments = () => {
-        const updateStatement = currentShipment.name && JSON.stringify(currentShipment) !== "{}";
-        if (updateStatement) {
-            const filteredShipments = allShipments.filter(s => {
-                return currentShipment.id !== s.id;
-            })
-            filteredShipments.push(currentShipment);
-            setAllShipments(filteredShipments);
-        }
-        setActivePopupSaved(false);
-    };
 
     // check is shipments has loaded in local storage
     useEffect(() => {
@@ -97,14 +114,18 @@ const MainPage = () => {
     }, [isShipmentsHasLoaded]);
     
     // PopUp windows layout
-    const popupAskToLoad = <Popup title="Load Shipments?" active={activePopupLoad}>
+    const popupAskToLoad = <Popup  
+                                title="Load Shipments?" 
+                                active={activePopupLoad}>
                                 <Button onClick={handleLoadButtonClick} className="button">Load</Button>
                             </Popup>;
-    const popupSuccess = <Popup 
+    const popupSuccess = <Popup
+                            timeoutClose={1} 
                             className="popup_success" 
                             title="Successfully loaded!" 
                             active={activePopupSuccess}/>;
-    const popupSaved = <Popup 
+    const popupSaved = <Popup
+                            timeoutClose={1} 
                             className="popup_success" 
                             title="Successfully saved!" 
                             active={activePopupSaved}/>;
