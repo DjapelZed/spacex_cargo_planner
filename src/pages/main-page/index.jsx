@@ -42,7 +42,6 @@ const MainPage = () => {
 
     useEffect(() => {
         if (allShipments) {
-            console.log(allShipments)
             cargoService.saveShipmentsToLocalStorage(allShipments);
         }
     }, [allShipments]);
