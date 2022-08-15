@@ -1,0 +1,59 @@
+@import "../resources/variables";
+
+.header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    color: $c-header;
+    background-color: $c-header-bg;
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 10px;
+        @media (max-width: $sm-width) {
+            padding-left: 0;
+        }
+    }
+    &__logo {
+        flex-shrink: 0;
+    }
+    &__controls {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        justify-content: center;
+        @media (max-width: $sm-width) {
+            gap: 10px;
+        }
+    }
+    &__title {
+        @media (max-width: $md-width) {
+            font-size: 1.2rem;
+        }
+        @media (max-width: $sm-width) {
+            display: none;
+        }
+    }
+    &__search {
+        min-width: 200px;
+        max-width: 600px;
+        width: 100%;
+    }
+    &__buttons {
+        display: flex;
+        gap: 8px;
+        @media (max-width: $sm-width) {
+            gap: 1px;
+        }
+    }
+    &__button {
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+    @media (max-width: $md-width) {
+        gap: 5px;
+    }
+}

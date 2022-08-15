@@ -1,0 +1,51 @@
+@import "../../../../resources/variables";
+
+.shipments-list {
+    border: 1px solid #aaa;
+    min-width: 100px;
+    overflow-y: auto;
+    
+    &__container {
+        height: 100%;
+        overflow-y: auto;
+        display: flex;
+        width: 230px;
+    }
+    &__list {
+        height: 100%;
+        overflow-y: auto;
+        flex: 1;
+    }
+    &__item {
+        a {
+            transition: all 0.2s ease-in-out 0s;
+            padding: 0 5px;
+            display: block;
+            text-decoration: none;
+            color: black;
+            
+        }
+        a.active {
+            font-size: 1.2rem;
+            background-color: $c-active-bg;
+            color: $c-active;
+        }
+        &:hover{
+            background-color: #aaa;
+        }
+    }
+    .error {
+        margin: 5px;
+        word-break: break-word;
+    }
+    .loader {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 30px;
+        }
+    }
+}
