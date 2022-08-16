@@ -13,7 +13,8 @@ const MainPage = () => {
     const [allShipments, setAllShipments] = useState(null); // contains all shipments info
     const [searchText, setSearchText] = useState(""); // keywords to filter ShipmentsList items
     const [isShipmentsHasLoaded, setIsShipmentsHasLoaded] = useState(false); // ready state, used by ShipmentsList
-    const [save, setSave] = useState(false);
+    const [save, setSave] = useState(false); // hook to save shipments
+    const [errorOnInput, setErrorOnInput] = useState(false); // deny saving shipments on input error
 
     const [activePopupSuccess, setActivePopupSuccess] = useState(false); // control popupSuccess
     const [activePopupSaved, setActivePopupSaved] = useState(false); // control popupSaved
@@ -30,9 +31,10 @@ const MainPage = () => {
 
     // save shipments from state to localStorage
     const saveShipments = () => {
-        setSave(true);
+        if (!errorOnInput) setSave(true);
     };
 
+    // update shipments on changing save state
     useEffect(() => {
         if (save) {
             updateAllShipments();
@@ -40,19 +42,21 @@ const MainPage = () => {
         }
     }, [save]);
 
+    // save shipments to local storage when allShipments has changed 
     useEffect(() => {
         if (allShipments) {
             cargoService.saveShipmentsToLocalStorage(allShipments);
         }
     }, [allShipments]);
     
+    // reset save state when there are currentShipment (bays, boxed) changes
     useEffect(() => {
         setSave(false);
     }, [currentShipment]);
     
     // push shipment changes from ShipmentInfo component to allShipments
     const updateAllShipments = () => {
-        const updateStatement = currentShipment.name ? true : false;
+        const updateStatement = currentShipment.name && !errorOnInput ? true : false;
         if (updateStatement) {
             const filteredShipments = allShipments.filter(s => {
                 return currentShipment.id !== s.id;
@@ -144,6 +148,7 @@ const MainPage = () => {
             {popupSaved}
             <Outlet 
                 context={[
+                    setErrorOnInput,
                     currentShipment, 
                     setCurrentShipment,
                     isShipmentsHasLoaded, 

@@ -10,6 +10,7 @@ import "./_shipment-info.scss";
 const ShipmentInfo = () => {
     let slug = useParams().name; // company name in lower register with replaced spaces
     const [
+        setErrorOnInput,
         currentShipment, 
         setCurrentShipment, 
         isShipmentsHasLoaded, 
@@ -25,6 +26,11 @@ const ShipmentInfo = () => {
     
     const calculator = new CalculatorService(); // calculate count of needed cargo bays
     const maxUnitPower = calculator.MAX_UNIT_POWER; // by default it's 10
+
+    // deny saving data on errors
+    useEffect(() => {
+        setErrorOnInput(errorInput || errorMaxUnitPower); // set errorOnInput state (main-page)
+    }, [errorInput, errorMaxUnitPower])
 
     // update current shipment state (main-page)
     useEffect(() => {
