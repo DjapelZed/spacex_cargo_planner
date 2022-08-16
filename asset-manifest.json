@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/spacex_cargo_planner/static/css/main.3eaae252.css",
-    "main.js": "/spacex_cargo_planner/static/js/main.d8ba2f63.js",
+    "main.js": "/spacex_cargo_planner/static/js/main.695f0701.js",
     "static/media/loader.gif": "/spacex_cargo_planner/static/media/loader.a1a996746e5e48352c81.gif",
     "static/media/search.svg": "/spacex_cargo_planner/static/media/search.ca21fc16724a1664b0e4.svg",
     "index.html": "/spacex_cargo_planner/index.html",
     "main.3eaae252.css.map": "/spacex_cargo_planner/static/css/main.3eaae252.css.map",
-    "main.d8ba2f63.js.map": "/spacex_cargo_planner/static/js/main.d8ba2f63.js.map"
+    "main.695f0701.js.map": "/spacex_cargo_planner/static/js/main.695f0701.js.map"
   },
   "entrypoints": [
     "static/css/main.3eaae252.css",
-    "static/js/main.d8ba2f63.js"
+    "static/js/main.695f0701.js"
   ]
 }
